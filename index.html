@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .card {
+            display: inline-block;
+            padding: 15px;
+            margin: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sensor Dashboard</h1>
+        <div class="card">
+            <h2>Humidity</h2>
+            <p id="humidity">Loading...</p>
+        </div>
+        <div class="card">
+            <h2>DHT Temperature</h2>
+            <p id="dht_temperature">Loading...</p>
+        </div>
+        <div class="card">
+            <h2>BMP Temperature</h2>
+            <p id="bmp_temperature">Loading...</p>
+        </div>
+        <div class="card">
+            <h2>Pressure</h2>
+            <p id="pressure">Loading...</p>
+        </div>
+        <div class="card">
+            <h2>Average Temperature</h2>
+            <p id="avg_temperature">Loading...</p>
+        </div>
+    </div>
+
+    <script>
+        async function fetchSensorData() {
+            try {
+                const response = await fetch('/sensor_data');
+                const data = await response.json();
+
+                document.getElementById('humidity').textContent = `${data.humidity} %`;
+                document.getElementById('dht_temperature').textContent = `${data.dht_temperature} °C`;
+                document.getElementById('bmp_temperature').textContent = `${data.bmp_temperature} °C`;
+                document.getElementById('pressure').textContent = `${data.pressure} hPa`;
+                document.getElementById('avg_temperature').textContent = `${data.avg_temperature} °C`;
+            } catch (error) {
+                console.error('Error fetching sensor data:', error);
+            }
+        }
+
+        // Fetch data every 2 seconds
+        setInterval(fetchSensorData, 2000);
+        fetchSensorData();
+    </script>
+</body>
+</html>
