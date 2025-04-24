@@ -1,3 +1,4 @@
+🌦️ LoRa-Based Weather Station
 This project is a LoRa-based weather monitoring system designed to collect real-time environmental data using sensors and display it through a responsive web dashboard.
 
 🔧 Features:
@@ -19,4 +20,3 @@ HTML/CSS + JavaScript
 Serial communication via PySerial and SerialPort
 
 ThingSpeak API for cloud integration
-
